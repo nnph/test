@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useWeb3React } from '@web3-react/metamask';
+import Web3 from 'web3';
 import { Binance } from '@binance-chain/javascript-sdk';
 
 const App = () => {
   const [account, setAccount] = useState(null);
-  const web3 = useWeb3React();
+
+  // Initialize a Web3 instance
+  const web3 = new Web3(window.ethereum);
 
   const handleConnect = async () => {
     if (!web3) return;
