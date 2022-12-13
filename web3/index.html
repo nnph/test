@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <title>My Web3 App</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.26.0/babel.min.js"></script>
+    <script src="https://unpkg.com/web3@1.0.0/dist/web3.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const { useState, useEffect } = React;
+
+      function App() {
+        const [address, setAddress] = useState(null);
+
+        useEffect(() => {
+          if (typeof window.ethereum !== 'undefined') {
+            // use the user's MetaMask account
+            const web3 = new Web3(window.ethereum);
+            window.ethereum.enable().then(() => {
+              // get the user's Ethereum address
+              const address = web3.eth.defaultAccount;
+              setAddress(address);
+            });
+          }
+        }, []);
+
+        if (address) {
+          return <p>Your Ethereum address is: {address}</p>;
+        } else {
+          return <p>Please install and connect to MetaMask to continue.</p>;
+        }
+      }
+
+      ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+  </body>
+</html>
