@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useWeb3 } from '@metamask/react-web3';
+import { useWeb3React } from '@web3-react/metamask';
 import { Binance } from '@binance-chain/javascript-sdk';
 
 const App = () => {
   const [account, setAccount] = useState(null);
-  const web3 = useWeb3();
+  const web3 = useWeb3React();
 
   const handleConnect = async () => {
     if (!web3) return;
